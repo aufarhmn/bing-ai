@@ -12,7 +12,7 @@ async def test_ask(prompt):
         cookies = json.loads(open("bing_cookies.json", encoding="utf-8").read())
         bot = await Chatbot.create(cookies=cookies)
         response = await bot.ask(
-            prompt=prompt,
+            prompt="Saya memiliki issue github seperti berikut " + prompt + " tolong berikan rekomendasi solusinya",
             conversation_style=ConversationStyle.balanced,
             simplify_response=True
         )
