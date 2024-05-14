@@ -16,7 +16,7 @@ async def test_ask(prompt):
             conversation_style=ConversationStyle.balanced,
             simplify_response=True
         )
-        return response
+        return response.get('text', '')
     except Exception as error:
         raise error
     finally:
@@ -30,8 +30,8 @@ def handle_ask_request():
         prompt = request_data.get('prompt', '')
         if not prompt:
             return jsonify({'error': 'Prompt not provided'}), 400
-        response = asyncio.run(test_ask(prompt))
-        return jsonify(response)
+        response_text = asyncio.run(test_ask(prompt))
+        return jsonify(response_text)
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
